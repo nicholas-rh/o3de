@@ -16,7 +16,6 @@ set(FILES
     Configurations_linux_aarch64.cmake
     Configurations_linux_x86_64.cmake
     Install_linux.cmake
-    libzstd_linux.cmake
     LYTestWrappers_linux.cmake
     LYWrappers_linux.cmake
     OpenSSL_linux.cmake
@@ -29,4 +28,5 @@ set(FILES
     RPathChange.cmake
     runtime_dependencies_linux.cmake.in
     RuntimeDependencies_linux.cmake    
+    SystemPackage_linux.cmake
 )
