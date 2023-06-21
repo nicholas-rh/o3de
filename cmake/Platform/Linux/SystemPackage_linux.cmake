@@ -10,7 +10,7 @@ include_guard()
 
 find_package(PkgConfig REQUIRED)
 
-function(system_package_pkg_check package target alias)
+function(system_package_pkg_config package target alias)
 pkg_check_modules(${alias} IMPORTED_TARGET ${package})
 if (NOT TARGET PkgConfig::${alias})
     message(FATAL_ERROR "Package ${package} not found.")

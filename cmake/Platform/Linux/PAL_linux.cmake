@@ -55,9 +55,24 @@ set_property(CACHE PAL_TRAIT_LINUX_WINDOW_MANAGER PROPERTY STRINGS xcb wayland)
 
 include(${CMAKE_CURRENT_LIST_DIR}/SystemPackage_linux.cmake)
 
-system_package_pkg_check(libzstd zstd zstd)
-system_package_pkg_check(libunwind unwind unwind)
+system_package_pkg_config(libzstd zstd zstd)
+
+system_package_find_package(ZLIB ZLIB::ZLIB ZLIB)
+add_library(3rdParty::zlib ALIAS ZLIB::ZLIB)
+
+system_package_pkg_config(libunwind unwind unwind)
+
 system_package_find_package(expat expat::expat expat)
+
+system_package_find_package(Freetype Freetype::Freetype Freetype)
+
+system_package_pkg_config(samplerate libsamplerate libsamplerate)
+
+system_package_find_package(PNG PNG::PNG PNG)
+
+system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
+
+system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
 
 # Use system default OpenSSL library instead of maintaining an O3DE version for Linux
 include(${CMAKE_CURRENT_LIST_DIR}/OpenSSL_linux.cmake)
