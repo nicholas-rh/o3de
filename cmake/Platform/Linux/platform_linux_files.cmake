@@ -17,7 +17,6 @@ set(FILES
     Install_linux.cmake
     LYTestWrappers_linux.cmake
     LYWrappers_linux.cmake
-    OpenSSL_linux.cmake
     Packaging_linux.cmake
     PackagingCodeSign_linux.cmake
     PackagingPostBuild_linux.cmake
@@ -27,4 +26,5 @@ set(FILES
     RPathChange.cmake
     runtime_dependencies_linux.cmake.in
     RuntimeDependencies_linux.cmake    
+    SystemPackages_linux.cmake    
 )
