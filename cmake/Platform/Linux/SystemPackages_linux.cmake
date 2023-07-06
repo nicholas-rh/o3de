@@ -6,9 +6,8 @@
 #
 #
 
-include_guard()
-
 find_package(PkgConfig REQUIRED)
+    include(cmake/Install.cmake)
 
 function(system_package_pkg_config package target alias)
 pkg_check_modules(${alias} IMPORTED_TARGET ${package})
@@ -17,9 +16,6 @@ if (NOT TARGET PkgConfig::${alias})
 else()
     add_library(3rdParty::${alias} ALIAS PkgConfig::${target})
     set_target_properties(PkgConfig::${target} PROPERTIES LY_SYSTEM_LIBRARY TRUE)
-
-    # include Install.cmake to get access to the ly_install function
-    include(cmake/Install.cmake)
 
     cmake_path(RELATIVE_PATH CMAKE_CURRENT_LIST_DIR BASE_DIRECTORY ${LY_ROOT_FOLDER} OUTPUT_VARIABLE ${alias}_linux_cmake_rel_directory)
     ly_install(FILES "${CMAKE_CURRENT_LIST_FILE}"
@@ -37,9 +33,6 @@ if (NOT ${package}_FOUND)
 else()
     add_library(3rdParty::${alias} ALIAS ${target})
     set_target_properties(${target} PROPERTIES LY_SYSTEM_LIBRARY TRUE)
-
-    # include Install.cmake to get access to the ly_install function
-    include(cmake/Install.cmake)
 
     cmake_path(RELATIVE_PATH CMAKE_CURRENT_LIST_DIR BASE_DIRECTORY ${LY_ROOT_FOLDER} OUTPUT_VARIABLE ${alias}_linux_cmake_rel_directory)
     ly_install(FILES "${CMAKE_CURRENT_LIST_FILE}"
@@ -87,3 +80,12 @@ system_package_find_package(PNG PNG::PNG PNG)
 system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
 
 system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
+
+find_library(libmikktspace libmikktspace.so.0)
+add_library(3rdParty::mikkelsen INTERFACE IMPORTED GLOBAL)
+set_property(TARGET 3rdParty::mikkelsen APPEND PROPERTY INTERFACE_LINK_LIBRARIES libmikktspace)
+
+find_library(libdxcompiler libdxcompiler.so)
+add_library(3rdParty::DirectXShaderCompilerDxc INTERFACE IMPORTED GLOBAL)
+set_property(TARGET 3rdParty::DirectXShaderCompilerDxc APPEND PROPERTY INTERFACE_LINK_LIBRARIES libdxcompiler)
+
