@@ -69,10 +69,6 @@ add_library(3rdParty::zlib ALIAS ZLIB::ZLIB)
 
 system_package_pkg_config(libunwind unwind unwind)
 
-system_package_find_package(expat expat::expat expat)
-
-system_package_find_package(Freetype Freetype::Freetype Freetype)
-
 system_package_pkg_config(samplerate libsamplerate libsamplerate)
 
 system_package_find_package(PNG PNG::PNG PNG)
@@ -81,11 +77,11 @@ system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
 
 system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
 
-find_library(libmikktspace libmikktspace.so.0)
+find_library(libmikktspace libmikktspace.so)
 add_library(3rdParty::mikkelsen INTERFACE IMPORTED GLOBAL)
-set_property(TARGET 3rdParty::mikkelsen APPEND PROPERTY INTERFACE_LINK_LIBRARIES libmikktspace)
+set_property(TARGET 3rdParty::mikkelsen APPEND PROPERTY INTERFACE_LINK_LIBRARIES ${libmikktspace})
 
 find_library(libdxcompiler libdxcompiler.so)
 add_library(3rdParty::DirectXShaderCompilerDxc INTERFACE IMPORTED GLOBAL)
-set_property(TARGET 3rdParty::DirectXShaderCompilerDxc APPEND PROPERTY INTERFACE_LINK_LIBRARIES libdxcompiler)
+set_property(TARGET 3rdParty::DirectXShaderCompilerDxc APPEND PROPERTY INTERFACE_LINK_LIBRARIES ${libdxcompiler})
 
