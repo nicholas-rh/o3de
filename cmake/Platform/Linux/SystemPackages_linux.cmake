@@ -7,7 +7,8 @@
 #
 
 find_package(PkgConfig REQUIRED)
-    include(cmake/Install.cmake)
+include(cmake/Install.cmake)
+include(cmake/LYWrappers.cmake)
 
 function(system_package_pkg_config package target alias)
 pkg_check_modules(${alias} IMPORTED_TARGET ${package})
@@ -43,6 +44,9 @@ else()
 endif()
 endfunction()
 
+system_package_find_package(ZLIB ZLIB::ZLIB ZLIB)
+add_library(3rdParty::zlib ALIAS ZLIB::ZLIB)
+
 find_package(OpenSSL)
 if (NOT OpenSSL_FOUND)
    message(FATAL_ERROR "Compiling on linux requires the development headers for OpenSSL.  Try using your package manager to install the OpenSSL development libraries following https://wiki.openssl.org/index.php/Libssl_API")
@@ -64,24 +68,24 @@ ly_install(FILES "${CMAKE_CURRENT_LIST_FILE}"
     COMPONENT ${CMAKE_INSTALL_DEFAULT_COMPONENT_NAME}
 )
 
-system_package_find_package(ZLIB ZLIB::ZLIB ZLIB)
-add_library(3rdParty::zlib ALIAS ZLIB::ZLIB)
-
 system_package_pkg_config(libunwind unwind unwind)
 
-system_package_pkg_config(samplerate libsamplerate libsamplerate)
+set(DXC_NAME "DirectXShaderCompilerDxc")
+set(TARGET_WITH_NAMESPACE "3rdParty::${DXC_NAME}")
+if (TARGET ${TARGET_WITH_NAMESPACE})
+    return()
+endif()
 
-system_package_find_package(PNG PNG::PNG PNG)
+set(dxc_output_subfolder "Builders/DirectXShaderCompiler")
+set(${DXC_NAME}_BINARY_DIR /bin)
+set(${DXC_NAME}_LIB_DIR /usr/lib64)
 
-system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
+add_library(${TARGET_WITH_NAMESPACE} INTERFACE IMPORTED GLOBAL)
 
-system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
+set(${DXC_NAME}_BIN_RUNTIME_DEPENDENCIES ${${DXC_NAME}_BINARY_DIR}/dxc ${${DXC_NAME}_BINARY_DIR}/dxc-3.7)
+ly_add_target_files(TARGETS ${TARGET_WITH_NAMESPACE} OUTPUT_SUBDIRECTORY "${dxc_output_subfolder}/bin" FILES ${${DXC_NAME}_BIN_RUNTIME_DEPENDENCIES})
 
-find_library(libmikktspace libmikktspace.so)
-add_library(3rdParty::mikkelsen INTERFACE IMPORTED GLOBAL)
-set_property(TARGET 3rdParty::mikkelsen APPEND PROPERTY INTERFACE_LINK_LIBRARIES ${libmikktspace})
+set(${DXC_NAME}_LIB_RUNTIME_DEPENDENCIES ${${DXC_NAME}_LIB_DIR}/libdxcompiler.so ${${DXC_NAME}_LIB_DIR}/libdxcompiler.so.3.7)
 
-find_library(libdxcompiler libdxcompiler.so)
-add_library(3rdParty::DirectXShaderCompilerDxc INTERFACE IMPORTED GLOBAL)
-set_property(TARGET 3rdParty::DirectXShaderCompilerDxc APPEND PROPERTY INTERFACE_LINK_LIBRARIES ${libdxcompiler})
-
+ly_add_target_files(TARGETS ${TARGET_WITH_NAMESPACE} OUTPUT_SUBDIRECTORY "${dxc_output_subfolder}/lib" FILES ${${DXC_NAME}_LIB_RUNTIME_DEPENDENCIES})
+set(${DXC_NAME}_FOUND True)
