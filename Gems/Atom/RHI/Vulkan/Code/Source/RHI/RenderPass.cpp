@@ -376,7 +376,7 @@ namespace AZ
             };
 
             template<typename T, VkStructureType type = AZStd::numeric_limits<VkStructureType>::max()>
-            struct StructureTypeTraits
+	    struct StructureTypeTraits
             {
                 static const VkStructureType struct_type = type;
                 typedef T value_type;
