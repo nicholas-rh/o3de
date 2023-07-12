@@ -145,7 +145,7 @@ function(ly_pip_install_local_package_editable package_folder_path pip_package_n
     file(MAKE_DIRECTORY ${stamp_file_directory})
     
     # for the first release of the o3de snap we will only use packages shipped with o3de
-    if ($ENV{O3DE_SNAP} OR $ENV{O3DE_ROOT_INSTALL})
+    if ($ENV{O3DE_SNAP})
         file(TOUCH ${stamp_file})
     endif()
    

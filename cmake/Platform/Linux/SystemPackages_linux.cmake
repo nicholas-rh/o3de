@@ -47,6 +47,25 @@ endfunction()
 system_package_find_package(ZLIB ZLIB::ZLIB ZLIB)
 add_library(3rdParty::zlib ALIAS ZLIB::ZLIB)
 
+system_package_pkg_config(libunwind unwind unwind)
+
+system_package_find_package(expat expat::expat expat)
+
+system_package_find_package(Freetype Freetype::Freetype Freetype)
+
+system_package_pkg_config(samplerate libsamplerate libsamplerate)
+
+system_package_find_package(PNG PNG::PNG PNG)
+
+system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
+
+system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
+
+find_library(libmikktspace libmikktspace.so)
+add_library(mikktspace SHARED IMPORTED)
+set_property(TARGET mikktspace PROPERTY IMPORTED_LOCATION ${libmikktspace})
+add_library(3rdParty::mikkelsen ALIAS mikktspace)
+
 find_package(OpenSSL)
 if (NOT OpenSSL_FOUND)
    message(FATAL_ERROR "Compiling on linux requires the development headers for OpenSSL.  Try using your package manager to install the OpenSSL development libraries following https://wiki.openssl.org/index.php/Libssl_API")
@@ -67,8 +86,6 @@ ly_install(FILES "${CMAKE_CURRENT_LIST_FILE}"
     DESTINATION "${openssl_cmake_rel_directory}"
     COMPONENT ${CMAKE_INSTALL_DEFAULT_COMPONENT_NAME}
 )
-
-system_package_pkg_config(libunwind unwind unwind)
 
 set(DXC_NAME "DirectXShaderCompilerDxc")
 set(TARGET_WITH_NAMESPACE "3rdParty::${DXC_NAME}")
