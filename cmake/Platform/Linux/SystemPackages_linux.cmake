@@ -49,10 +49,6 @@ add_library(3rdParty::zlib ALIAS ZLIB::ZLIB)
 
 system_package_pkg_config(libunwind unwind unwind)
 
-system_package_find_package(expat expat::expat expat)
-
-system_package_find_package(Freetype Freetype::Freetype Freetype)
-
 system_package_pkg_config(samplerate libsamplerate libsamplerate)
 
 system_package_find_package(PNG PNG::PNG PNG)
@@ -63,7 +59,7 @@ system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
 
 find_library(libmikktspace libmikktspace.so)
 add_library(mikktspace SHARED IMPORTED)
-set_property(TARGET mikktspace PROPERTY IMPORTED_LOCATION ${libmikktspace})
+set_target_properties(mikktspace PROPERTIES IMPORTED_LOCATION ${libmikktspace} LY_SYSTEM_LIBRARY TRUE)
 add_library(3rdParty::mikkelsen ALIAS mikktspace)
 
 find_package(OpenSSL)
