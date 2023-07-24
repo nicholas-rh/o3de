@@ -32,6 +32,7 @@ ly_associate_package(PACKAGE_NAME openimageio-opencolorio-2.3.17-rev2-linux     
 ly_associate_package(PACKAGE_NAME OpenMesh-8.1-rev3-linux                           TARGETS OpenMesh                    PACKAGE_HASH 805bd0b24911bb00c7f575b8c3f10d7ea16548a5014c40811894a9445f17a126)
 ly_associate_package(PACKAGE_NAME OpenEXR-3.1.3-rev4-linux                          TARGETS Imath               	PACKAGE_HASH fcbac68cfb4e3b694580bc3741443e111aced5f08fde21a92e0c768e8803c7af)
 ly_associate_package(PACKAGE_NAME SPIRVCross-2021.04.29-rev1-linux                  TARGETS SPIRVCross                  PACKAGE_HASH 7889ee5460a688e9b910c0168b31445c0079d363affa07b25d4c8aeb608a0b80)
+ly_associate_package(PACKAGE_NAME SQLite-3.37.2-rev1-linux                          TARGETS SQLite                      PACKAGE_HASH d11f7c26bb5cdb17a615c239e8758f432a50f8c03ccbaa0eddbc3bdc86bc06ed)
 ly_associate_package(PACKAGE_NAME azslc-1.8.15-rev2-linux                           TARGETS azslc                       PACKAGE_HASH a29b9fd5123f2fe9dc99040180c6e15e5c72f0cf72da63671e6602f80c0349a5)
 ly_associate_package(PACKAGE_NAME squish-ccr-deb557d-rev1-linux                     TARGETS squish-ccr                  PACKAGE_HASH 85fecafbddc6a41a27c5f59ed4a5dfb123a94cb4666782cf26e63c0a4724c530)
 ly_associate_package(PACKAGE_NAME astc-encoder-3.2-rev2-linux                       TARGETS astc-encoder                PACKAGE_HASH 71549d1ca9e4d48391b92a89ea23656d3393810e6777879f6f8a9def2db1610c)

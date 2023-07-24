@@ -55,8 +55,6 @@ system_package_find_package(PNG PNG::PNG PNG)
 
 system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
 
-system_package_find_package(SQLite3 SQLite::SQLite3 SQLite)
-
 find_library(libmikktspace libmikktspace.so)
 add_library(mikktspace SHARED IMPORTED)
 set_target_properties(mikktspace PROPERTIES IMPORTED_LOCATION ${libmikktspace} LY_SYSTEM_LIBRARY TRUE)
