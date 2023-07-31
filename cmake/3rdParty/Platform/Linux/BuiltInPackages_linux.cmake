@@ -20,6 +20,7 @@ ly_associate_package(PACKAGE_NAME xxhash-0.7.4-rev1-multiplatform               
 # platform-specific:
 ly_associate_package(PACKAGE_NAME expat-2.4.2-rev2-linux                            TARGETS expat                       PACKAGE_HASH 755369a919e744b9b3f835d1acc684f02e43987832ad4a1c0b6bbf884e6cd45b)
 ly_associate_package(PACKAGE_NAME assimp-5.2.5-rev1-linux                           TARGETS assimplib                   PACKAGE_HASH 67bd3625078b63b40ae397ef7a3e589a6f77e95d3318c97dd7075e3e22a638cd)
+ly_associate_package(PACKAGE_NAME AWSNativeSDK-1.9.50-rev4-linux                    TARGETS AWSNativeSDK                PACKAGE_HASH e4e81ce83f751a61deb87389e41b05ddcf1dceaf8d642b7735bc2ae42eadb483)
 ly_associate_package(PACKAGE_NAME AWSGameLiftServerSDK-3.4.2-rev1-linux             TARGETS AWSGameLiftServerSDK        PACKAGE_HASH 875a8ee45ab5948b10eedfd9057b14db7f01c4b31820f8f998eb6dee1c05a176)
 ly_associate_package(PACKAGE_NAME tiff-4.2.0.15-rev3-linux                          TARGETS TIFF                        PACKAGE_HASH 2377f48b2ebc2d1628d9f65186c881544c92891312abe478a20d10b85877409a)
 ly_associate_package(PACKAGE_NAME freetype-2.11.1-rev1-linux                        TARGETS Freetype                    PACKAGE_HASH 28bbb850590507eff85154604787881ead6780e6eeee9e71ed09cd1d48d85983)
@@ -34,7 +35,7 @@ ly_associate_package(PACKAGE_NAME libsamplerate-0.2.1-rev2-linux                
 ly_associate_package(PACKAGE_NAME openimageio-opencolorio-2.3.17-rev2-linux         TARGETS OpenImageIO OpenColorIO OpenColorIO::Runtime OpenImageIO::Tools::Binaries OpenImageIO::Tools::PythonPlugins PACKAGE_HASH c8a9f1d9d6c9f8c3defdbc3761ba391d175b1cb62a70473183af1eaeaef70c36)
 ly_associate_package(PACKAGE_NAME OpenMesh-8.1-rev3-linux                           TARGETS OpenMesh                    PACKAGE_HASH 805bd0b24911bb00c7f575b8c3f10d7ea16548a5014c40811894a9445f17a126)
 ly_associate_package(PACKAGE_NAME OpenEXR-3.1.3-rev4-linux                          TARGETS OpenEXR Imath               PACKAGE_HASH fcbac68cfb4e3b694580bc3741443e111aced5f08fde21a92e0c768e8803c7af)
-ly_associate_package(PACKAGE_NAME DirectXShaderCompilerDxc-1.6.2112-o3de-rev1-linux TARGETS DirectXShaderCompilerDxc    PACKAGE_HASH ac9f98e0e3b07fde0f9bbe1e6daa386da37699819cde06dcc8d3235421f6e977)
+ly_associate_package(PACKAGE_NAME OpenSSL-1.1.1t-rev1-linux                         TARGETS OpenSSL                     PACKAGE_HASH 63aea898b7afe8faccd0c7261e62d2f8b7b870f678a4520d5be81e5815542b39)
 ly_associate_package(PACKAGE_NAME SPIRVCross-2021.04.29-rev1-linux                  TARGETS SPIRVCross                  PACKAGE_HASH 7889ee5460a688e9b910c0168b31445c0079d363affa07b25d4c8aeb608a0b80)
 ly_associate_package(PACKAGE_NAME azslc-1.8.15-rev2-linux                           TARGETS azslc                       PACKAGE_HASH a29b9fd5123f2fe9dc99040180c6e15e5c72f0cf72da63671e6602f80c0349a5)
 ly_associate_package(PACKAGE_NAME zlib-1.2.11-rev5-linux                            TARGETS ZLIB                        PACKAGE_HASH 9be5ea85722fc27a8645a9c8a812669d107c68e6baa2ca0740872eaeb6a8b0fc)
@@ -52,14 +53,5 @@ if(AZ_USE_PHYSX5)
     ly_associate_package(PACKAGE_NAME PhysX-5.1.1-rev1-linux                            TARGETS PhysX                       PACKAGE_HASH 343e3123882f53748c938c41f4d1c9ab6ec171e4f970ccd9263c5ab191110410)
 else()
     ly_associate_package(PACKAGE_NAME PhysX-4.1.2.29882248-rev5-linux                   TARGETS PhysX                       PACKAGE_HASH fa72365df409376aef02d1763194dc91d255bdfcb4e8febcfbb64d23a3e50b96)
-endif()
-
-# Certain packages are built against OpenSSL, so we must associate the proper ones based on their OpenSSL (Major) versions
-if ("${OPENSSL_VERSION}" STREQUAL "")
-	message(FATAL_ERROR "OpenSSL not detected. The OpenSSL dev package is required for O3DE")
-elseif ("${OPENSSL_VERSION}" VERSION_LESS "3.0.0")
-	ly_associate_package(PACKAGE_NAME AWSNativeSDK-1.9.50-rev2-linux-openssl-1          TARGETS AWSNativeSDK                PACKAGE_HASH d4489e9970dadcab52e1db17d47242c2a66478e51c5f1434f9143eeaff5c3223)
-else()
-	ly_associate_package(PACKAGE_NAME AWSNativeSDK-1.9.50-rev2-linux-openssl-3          TARGETS AWSNativeSDK                PACKAGE_HASH 9b9b5124791fb2f59b7362a95ed997944aff6cc928b9dede916e8968a09f23ff)
 endif()
 
