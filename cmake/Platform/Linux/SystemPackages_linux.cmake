@@ -75,7 +75,7 @@ if (LY_SYSTEM_PACKAGE_libpng)
 system_package_find_package(PNG PNG::PNG PNG)
 endif()
 
-if (LY_SYSTEM_PACKAGE_DirectXShaderCompilerDxc)
+if (LY_SYSTEM_PACKAGE_OpenEXR)
 system_package_pkg_config(OpenEXR OpenEXR OpenEXR)
 endif()
 
